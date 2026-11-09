@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priya Gupta — Backend Engineer</title>
+  <meta name="description" content="Portfolio of Priya Gupta — Backend Software Engineer specializing in Java, Spring Boot, distributed systems, and event-driven architectures." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --text: #1c1917;
+      --text-secondary: #57534e;
+      --text-muted: #a8a29e;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --border: #e7e5e4;
+      --border-light: #f5f5f4;
+      --radius: 10px;
+      --max-w: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.75; }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .logo {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    nav .nav-links { display: flex; gap: 28px; }
+
+    nav .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover { color: var(--text); opacity: 1; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* ─── Sections ─── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 100px 0 80px;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.75;
+    }
+
+    .hero-links {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #292524; color: #fff; opacity: 1; }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--border-light); opacity: 1; }
+
+    /* ─── About ─── */
+    .about-text {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* ─── Skills ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+
+    .skill-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--border-light);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* ─── Projects ─── */
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s;
+    }
+
+    .project:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .project h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .project-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .project-subtitle {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .project ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .project li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .project li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .project-tech {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tech span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    .project-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .project-links a {
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .project-links a svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ─── Education ─── */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .edu-item:last-child { border-bottom: none; }
+
+    .edu-item h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .edu-item .edu-school {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .edu-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .edu-meta .year {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .edu-meta .score {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ─── Certifications ─── */
+    .cert-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cert-list li {
+      position: relative;
+      padding: 14px 0 14px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .cert-list li:last-child { border-bottom: none; }
+
+    .cert-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 21px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    .cert-org {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ─── Contact ─── */
+    .contact-section {
+      text-align: center;
+      padding: 80px 0 100px;
+    }
+
+    .contact-section p {
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      nav .nav-links { display: none; }
+      .hamburger { display: block; }
+
+      nav .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        gap: 16px;
+      }
+
+      .hero { padding: 60px 0 50px; }
+      section { padding: 48px 0; }
+      .project { padding: 20px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .edu-item { flex-direction: column; }
+      .edu-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <span class="logo">Priya Gupta</span>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">Backend Software Engineer</p>
+      <h1>Hi, I'm Priya.</h1>
+      <p>
+        I'm a final year CS student at Netaji Subhash Engineering College, Kolkata.
+        I build backend systems that are reliable, well-structured, and ready for production —
+        from JWT-secured REST APIs to event-driven pipelines with Kafka and Redis.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:priyaguptaindia56@gmail.com" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Get in touch
+        </a>
+        <a href="https://github.com/priyagupta35" target="_blank" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/priya-gupta35" target="_blank" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About</p>
+      <h2>A bit about me</h2>
+      <p class="about-text">
+        I'm a final year Computer Science &amp; Business Systems student with strong fundamentals in DSA, OOP, and Java backend development, extending into event-driven systems with Python, Kafka, and Redis. I've built and deployed REST APIs using Spring Boot, PostgreSQL, and MySQL — including a JWT-secured personal finance platform and an event-driven logistics backend with idempotent Kafka consumers.
+      </p>
+      <br />
+      <p class="about-text">
+        I'm currently looking for <strong>Software Development Engineer (SDE-1) / Backend Developer</strong> roles where I can work on systems that actually matter at scale.
+      </p>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <h2>What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Backend &amp; Frameworks</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">Spring MVC</span>
+            <span class="skill-tag">Spring Data JPA</span>
+            <span class="skill-tag">Spring Security</span>
+            <span class="skill-tag">Hibernate</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Microservices</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>AI / LLM</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Spring AI</span>
+            <span class="skill-tag">DeepSeek</span>
+            <span class="skill-tag">Ollama</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Databases &amp; Messaging</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">PostgreSQL (Neon)</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">Apache Kafka</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Security</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">JWT Authentication</span>
+            <span class="skill-tag">Role-Based Access Control</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Tools &amp; Infrastructure</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS (Cloud Foundations)</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Docker Compose</span>
+            <span class="skill-tag">Prometheus</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Swagger / OpenAPI</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Core Concepts</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">DSA</span>
+            <span class="skill-tag">MVC Architecture</span>
+            <span class="skill-tag">Layered Architecture</span>
+            <span class="skill-tag">OOP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h2>Things I've built</h2>
+
+      <!-- LogiStream -->
+      <div class="project">
+        <div class="project-header">
+          <h3>LogiStream</h3>
+          <span class="project-date">Oct 2026</span>
+        </div>
+        <p class="project-subtitle">Event-Driven Logistics &amp; Real-Time Delivery Backend</p>
+        <ul>
+          <li>Built an event-driven logistics backend in Python and FastAPI: order creation publishes events to Apache Kafka, and an independent dispatch service assigns the nearest driver using Redis GEO queries.</li>
+          <li>Implemented an idempotent consumer with a processed_events table written in the same PostgreSQL transaction as the business change, committing Kafka offsets manually only after the database commit.</li>
+          <li>Added retry with exponential backoff and a dead-letter topic for failed and malformed events, verified by injecting a bad message and reading it back from the DLQ.</li>
+          <li>Load-tested order creation (JWT auth, PostgreSQL write, Kafka publish per request) with 500 requests at 20 concurrent clients on a local Docker Compose setup: ~69 req/s, p95 latency 558 ms, 0 errors.</li>
+          <li>Containerized the full stack (API, PostgreSQL, Redis, Kafka, workers, Prometheus, Streamlit) with Docker Compose; built a live Streamlit + PyDeck dashboard and exposed request metrics at /metrics.</li>
+        </ul>
+        <div class="project-tech">
+          <span>Python</span><span>FastAPI</span><span>Apache Kafka</span><span>Redis</span><span>PostgreSQL</span><span>Docker Compose</span><span>Prometheus</span><span>Streamlit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/priyagupta35/LogiStream" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Source Code
+          </a>
+        </div>
+      </div>
+
+      <!-- TechPulse -->
+      <div class="project">
+        <div class="project-header">
+          <h3>TechPulse</h3>
+          <span class="project-date">Mar – May 2026</span>
+        </div>
+        <p class="project-subtitle">Microservices Tech News Aggregator &amp; AI Summarizer</p>
+        <ul>
+          <li>Built a Spring Boot backend as two services (Ingestion and Delivery), so data pipelines and client APIs can scale separately.</li>
+          <li>Fetches news from NewsAPI every 30 minutes with Spring Scheduler, and prevents duplicate articles in PostgreSQL using Spring Data JPA.</li>
+          <li>Added LLM article summarization using Spring AI with DeepSeek and Ollama, exposed through REST endpoints.</li>
+          <li>Secured the APIs with Spring Security and JWT roles (Reader, Contributor, Admin).</li>
+        </ul>
+        <div class="project-tech">
+          <span>Java 17</span><span>Spring Boot</span><span>Spring Security</span><span>Spring AI</span><span>DeepSeek</span><span>PostgreSQL</span><span>Docker</span><span>Render</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/priyagupta35/techpulse" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Source Code
+          </a>
+          <a href="https://news-delivery-service.onrender.com/api/articles" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live API
+          </a>
+        </div>
+      </div>
+
+      <!-- ExpenseFlow -->
+      <div class="project">
+        <div class="project-header">
+          <h3>ExpenseFlow</h3>
+          <span class="project-date">Aug – Sep 2026</span>
+        </div>
+        <p class="project-subtitle">Personal Finance Management REST API</p>
+        <ul>
+          <li>Built a secure finance API for budget tracking, income and expense logging, and monthly balance reports.</li>
+          <li>Used stateless JWT authentication with BCrypt. Each user can only access their own data, enforced with @AuthenticationPrincipal.</li>
+          <li>Fixed dropped database connections on Neon serverless PostgreSQL by tuning HikariCP pooling and idle timeouts.</li>
+          <li>Deployed on Render with a multi-stage Docker build. Added Swagger UI for testing in the browser.</li>
+        </ul>
+        <div class="project-tech">
+          <span>Java 17</span><span>Spring Boot</span><span>Spring Security</span><span>JWT</span><span>PostgreSQL (Neon)</span><span>Docker</span><span>Render</span><span>Swagger</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/priyagupta35/ExpenseFlow" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Source Code
+          </a>
+          <a href="https://expenseflow-1-n72u.onrender.com" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live API
+          </a>
+          <a href="https://expenseflow-1-n72u.onrender.com/swagger-ui/index.html" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            Swagger Docs
+          </a>
+        </div>
+      </div>
+
+      <!-- DSA -->
+      <div class="project">
+        <div class="project-header">
+          <h3>Java DSA Practice</h3>
+          <span class="project-date">Ongoing</span>
+        </div>
+        <p class="project-subtitle">Problem Solving, Algorithmic Efficiency &amp; Clean OO Design</p>
+        <ul>
+          <li>Linear Data Structures: Dynamic Arrays, Singly/Doubly Linked Lists, Stacks, Queues, Two Pointers, Sliding Window.</li>
+          <li>Non-Linear Structures: Binary Search Trees (BST), Heaps / Priority Queues, Graph traversals (BFS &amp; DFS).</li>
+          <li>Algorithmic Patterns: Divide &amp; Conquer, Binary Search optimizations, Recursion &amp; Backtracking fundamentals.</li>
+        </ul>
+        <div class="project-tech">
+          <span>Java 17</span><span>Data Structures</span><span>OOP Design Patterns</span><span>Complexity Analysis</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/priyagupta35/java-dsa-practice" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Source Code
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Education</p>
+      <h2>Where I studied</h2>
+
+      <div class="edu-item">
+        <div>
+          <h3>B.Tech — Computer Science &amp; Business Systems</h3>
+          <p class="edu-school">Netaji Subhash Engineering College, Kolkata</p>
+        </div>
+        <div class="edu-meta">
+          <p class="year">2023 – 2027</p>
+          <p class="score">CGPA: 7.33</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <h3>Class XII — ISC</h3>
+          <p class="edu-school">Adamas International School</p>
+        </div>
+        <div class="edu-meta">
+          <p class="year">2022</p>
+          <p class="score">83.4%</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <h3>Class X — ICSE</h3>
+          <p class="edu-school">Adamas International School</p>
+        </div>
+        <div class="edu-meta">
+          <p class="year">2020</p>
+          <p class="score">85.67%</p>
+        </div>
+      </div>
+
+      <br/>
+      <p class="section-label" style="margin-top: 20px;">Certifications &amp; Achievements</p>
+
+      <ul class="cert-list">
+        <li>
+          <strong>Software Engineering Job Simulation</strong>
+          <br/><span class="cert-org">Electronic Arts via Forage · Mar 2026</span>
+        </li>
+        <li>
+          <strong>Startup Ideation Hackathon — Finalist</strong>
+          <br/><span class="cert-org">Netaji Subhash Engineering College · Jan 2026</span>
+        </li>
+        <li>
+          <strong>AWS Academy Graduate — Cloud Foundations</strong>
+          <br/><span class="cert-org">AWS Academy · May 2026</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container"><div class="divider"></div></div>
+
+  <!-- Contact -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2>Let's talk</h2>
+      <p>
+        I'm actively looking for SDE-1 / Backend Engineer opportunities.<br/>
+        If you think I'd be a good fit, I'd love to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:priyaguptaindia56@gmail.com" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          priyaguptaindia56@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/priya-gupta35" target="_blank" class="btn btn-secondary">
+          LinkedIn
+        </a>
+        <a href="https://github.com/priyagupta35" target="_blank" class="btn btn-secondary">
+          GitHub
+        </a>
+        <a href="tel:+917003696006" class="btn btn-secondary">
+          +91 7003696006
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Priya Gupta. Built by hand.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
